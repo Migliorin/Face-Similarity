@@ -9,8 +9,8 @@ from torchvision.transforms import (CenterCrop, Compose, Normalize, Resize,
                                     ToTensor)
 from tqdm import tqdm
 
-from dataset import DatasetAnimal
-from mobilenet_v2 import MobileNetV2
+from dataset import DatasetGeneral
+from backbone.mobilenet_v2 import MobileNetV2
 from parse_args import parse_args
 from utils import get_images_labels
 
@@ -44,9 +44,9 @@ if __name__ == '__main__':
 
     print("------- Starting dataloaders -------")
 
-    train_dataset   = DatasetAnimal(train['images_paths'].tolist(), train['images_labels'].tolist(), transform_data=transform)
-    val_dataset     = DatasetAnimal(val['images_paths'].tolist(), val['images_labels'].tolist(), transform_data=transform)
-    test_dataset    = DatasetAnimal(test['images_paths'].tolist(), test['images_labels'].tolist(), transform_data=transform)
+    train_dataset   = DatasetGeneral(train['images_paths'].tolist(), train['images_labels'].tolist(), transform_data=transform)
+    val_dataset     = DatasetGeneral(val['images_paths'].tolist(), val['images_labels'].tolist(), transform_data=transform)
+    test_dataset    = DatasetGeneral(test['images_paths'].tolist(), test['images_labels'].tolist(), transform_data=transform)
 
     train_dataloader = DataLoader(train_dataset, num_workers=args.workers, batch_size=args.batch_size)
     val_dataloader = DataLoader(val_dataset, num_workers=args.workers, batch_size=args.batch_size)
